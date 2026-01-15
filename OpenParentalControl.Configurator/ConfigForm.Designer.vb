@@ -64,15 +64,12 @@ Partial Class ConfigForm
         Me.lblPasswordStatus = New System.Windows.Forms.Label()
         Me.btnTestConnection = New System.Windows.Forms.Button()
         Me.btnReloadService = New System.Windows.Forms.Button()
-
-        ' Controles nuevo límite diario
         Me.lblDailyLimit = New System.Windows.Forms.Label()
         Me.nudHours = New System.Windows.Forms.NumericUpDown()
         Me.nudMinutes = New System.Windows.Forms.NumericUpDown()
         Me.lblHours = New System.Windows.Forms.Label()
         Me.lblMinutes = New System.Windows.Forms.Label()
         Me.cbDailyAction = New System.Windows.Forms.ComboBox()
-
         CType(Me.dgvRestrictions, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudHours, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudMinutes, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -125,58 +122,6 @@ Partial Class ConfigForm
         Me.txtInterval.Size = New System.Drawing.Size(60, 20)
         Me.txtInterval.TabIndex = 5
         Me.txtInterval.Text = "5"
-        '
-        'lblDailyLimit
-        '
-        Me.lblDailyLimit.AutoSize = True
-        Me.lblDailyLimit.Location = New System.Drawing.Point(170, 46)
-        Me.lblDailyLimit.Name = "lblDailyLimit"
-        Me.lblDailyLimit.Size = New System.Drawing.Size(120, 13)
-        Me.lblDailyLimit.TabIndex = 19
-        Me.lblDailyLimit.Text = "Límite diario (horas/min):"
-        '
-        'nudHours
-        '
-        Me.nudHours.Location = New System.Drawing.Point(300, 44)
-        Me.nudHours.Maximum = New Decimal(New Integer() {23, 0, 0, 0})
-        Me.nudHours.Name = "nudHours"
-        Me.nudHours.Size = New System.Drawing.Size(50, 20)
-        Me.nudHours.TabIndex = 20
-        '
-        'lblHours
-        '
-        Me.lblHours.AutoSize = True
-        Me.lblHours.Location = New System.Drawing.Point(356, 46)
-        Me.lblHours.Name = "lblHours"
-        Me.lblHours.Size = New System.Drawing.Size(35, 13)
-        Me.lblHours.TabIndex = 21
-        Me.lblHours.Text = "horas"
-        '
-        'nudMinutes
-        '
-        Me.nudMinutes.Location = New System.Drawing.Point(405, 44)
-        Me.nudMinutes.Maximum = New Decimal(New Integer() {59, 0, 0, 0})
-        Me.nudMinutes.Name = "nudMinutes"
-        Me.nudMinutes.Size = New System.Drawing.Size(50, 20)
-        Me.nudMinutes.TabIndex = 22
-        '
-        'lblMinutes
-        '
-        Me.lblMinutes.AutoSize = True
-        Me.lblMinutes.Location = New System.Drawing.Point(461, 46)
-        Me.lblMinutes.Name = "lblMinutes"
-        Me.lblMinutes.Size = New System.Drawing.Size(44, 13)
-        Me.lblMinutes.TabIndex = 23
-        Me.lblMinutes.Text = "minutos"
-        '
-        'cbDailyAction
-        '
-        Me.cbDailyAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDailyAction.Items.AddRange(New Object() {"shutdown", "logout", "force_shutdown"})
-        Me.cbDailyAction.Location = New System.Drawing.Point(520, 43)
-        Me.cbDailyAction.Name = "cbDailyAction"
-        Me.cbDailyAction.Size = New System.Drawing.Size(100, 21)
-        Me.cbDailyAction.TabIndex = 24
         '
         'lbForbidden
         '
@@ -284,6 +229,58 @@ Partial Class ConfigForm
         Me.btnReloadService.TabIndex = 18
         Me.btnReloadService.Text = "Recargar servicio"
         '
+        'lblDailyLimit
+        '
+        Me.lblDailyLimit.AutoSize = True
+        Me.lblDailyLimit.Location = New System.Drawing.Point(170, 46)
+        Me.lblDailyLimit.Name = "lblDailyLimit"
+        Me.lblDailyLimit.Size = New System.Drawing.Size(123, 13)
+        Me.lblDailyLimit.TabIndex = 19
+        Me.lblDailyLimit.Text = "Límite diario (horas/min):"
+        '
+        'nudHours
+        '
+        Me.nudHours.Location = New System.Drawing.Point(300, 44)
+        Me.nudHours.Maximum = New Decimal(New Integer() {23, 0, 0, 0})
+        Me.nudHours.Name = "nudHours"
+        Me.nudHours.Size = New System.Drawing.Size(50, 20)
+        Me.nudHours.TabIndex = 20
+        '
+        'nudMinutes
+        '
+        Me.nudMinutes.Location = New System.Drawing.Point(405, 44)
+        Me.nudMinutes.Maximum = New Decimal(New Integer() {59, 0, 0, 0})
+        Me.nudMinutes.Name = "nudMinutes"
+        Me.nudMinutes.Size = New System.Drawing.Size(50, 20)
+        Me.nudMinutes.TabIndex = 22
+        '
+        'lblHours
+        '
+        Me.lblHours.AutoSize = True
+        Me.lblHours.Location = New System.Drawing.Point(356, 46)
+        Me.lblHours.Name = "lblHours"
+        Me.lblHours.Size = New System.Drawing.Size(33, 13)
+        Me.lblHours.TabIndex = 21
+        Me.lblHours.Text = "horas"
+        '
+        'lblMinutes
+        '
+        Me.lblMinutes.AutoSize = True
+        Me.lblMinutes.Location = New System.Drawing.Point(461, 46)
+        Me.lblMinutes.Name = "lblMinutes"
+        Me.lblMinutes.Size = New System.Drawing.Size(43, 13)
+        Me.lblMinutes.TabIndex = 23
+        Me.lblMinutes.Text = "minutos"
+        '
+        'cbDailyAction
+        '
+        Me.cbDailyAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbDailyAction.Items.AddRange(New Object() {"shutdown", "logout", "force_shutdown"})
+        Me.cbDailyAction.Location = New System.Drawing.Point(520, 43)
+        Me.cbDailyAction.Name = "cbDailyAction"
+        Me.cbDailyAction.Size = New System.Drawing.Size(100, 21)
+        Me.cbDailyAction.TabIndex = 24
+        '
         'ConfigForm
         '
         Me.ClientSize = New System.Drawing.Size(720, 460)
@@ -319,5 +316,6 @@ Partial Class ConfigForm
         CType(Me.nudMinutes, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
+
     End Sub
 End Class

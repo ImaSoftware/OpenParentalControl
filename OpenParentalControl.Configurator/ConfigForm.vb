@@ -33,7 +33,7 @@ Partial Public Class ConfigForm
         End If
     End Sub
 
-    ' --- Event handlers y lógica (sin cambios funcionales) ---
+    ' --- Event handlers y lógica ---
     Private Sub BtnBrowse_Click(sender As Object, e As EventArgs)
         Using ofd As New OpenFileDialog()
             ofd.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*"
@@ -56,6 +56,43 @@ Partial Public Class ConfigForm
             ' Intervalo
             Dim ks = root.Element("KillIntervalSeconds")
             If ks IsNot Nothing Then txtInterval.Text = ks.Value
+
+            ' Daily limit
+            Dim dl = root.Element("DailyLimit")
+            If dl IsNot Nothing Then
+                Dim hNode = dl.Element("Hours")
+                Dim mNode = dl.Element("Minutes")
+                Dim actNode = dl.Element("Action")
+                Dim h As Integer = 0
+                Dim m As Integer = 0
+                If hNode IsNot Nothing Then Integer.TryParse(hNode.Value, h)
+                If mNode IsNot Nothing Then Integer.TryParse(mNode.Value, m)
+                Try
+                    nudHours.Value = Math.Max(0, Math.Min(23, h))
+                Catch
+                    nudHours.Value = 0
+                End Try
+                Try
+                    nudMinutes.Value = Math.Max(0, Math.Min(59, m))
+                Catch
+                    nudMinutes.Value = 0
+                End Try
+                If actNode IsNot Nothing Then
+                    Dim act = actNode.Value.Trim().ToLower()
+                    If cbDailyAction.Items.Contains(act) Then
+                        cbDailyAction.SelectedItem = act
+                    Else
+                        ' intentar seleccionar por índice si existe
+                        If cbDailyAction.Items.Count > 0 Then cbDailyAction.SelectedIndex = 0
+                    End If
+                Else
+                    If cbDailyAction.Items.Count > 0 Then cbDailyAction.SelectedIndex = 0
+                End If
+            Else
+                nudHours.Value = 0
+                nudMinutes.Value = 0
+                If cbDailyAction.Items.Count > 0 Then cbDailyAction.SelectedIndex = 0
+            End If
 
             ' Forbidden
             lbForbidden.Items.Clear()
@@ -119,6 +156,7 @@ Partial Public Class ConfigForm
                 End If
             End If
 
+            ' Crear documento base
             Dim doc As New XDocument(New XElement("Settings",
                                                    New XElement("KillIntervalSeconds", txtInterval.Text.Trim()),
                                                    New XElement("Forbidden"),
@@ -141,6 +179,19 @@ Partial Public Class ConfigForm
                                                              New XElement("End", en),
                                                              New XElement("Action", a)))
             Next
+
+            ' Daily limit: añadir o actualizar el nodo
+            Dim hours = CInt(nudHours.Value)
+            Dim minutes = CInt(nudMinutes.Value)
+            Dim action = If(cbDailyAction.SelectedItem Is Nothing, "shutdown", cbDailyAction.SelectedItem.ToString())
+            ' Remover si existe para evitar duplicados
+            Dim existingDl = root.Element("DailyLimit")
+            If existingDl IsNot Nothing Then existingDl.Remove()
+            root.Add(New XElement("DailyLimit",
+                                  New XElement("Hours", hours.ToString()),
+                                  New XElement("Minutes", minutes.ToString()),
+                                  New XElement("Action", action)
+                                  ))
 
             ' Guardar el hash: si hay nueva contraseña, usarla; si no, conservar la existente
             If Not String.IsNullOrEmpty(newPwd) Then
@@ -229,4 +280,5 @@ Partial Public Class ConfigForm
             Return sb.ToString()
         End Using
     End Function
+
 End Class
