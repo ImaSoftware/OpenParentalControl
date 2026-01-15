@@ -1,11 +1,11 @@
 ﻿Imports System.ServiceProcess
 
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Service1
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class MainService
     Inherits System.ServiceProcess.ServiceBase
 
     'UserService reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -17,8 +17,8 @@ Partial Class Service1
     End Sub
 
     ' Punto de entrada principal del proceso
-    <MTAThread()> _
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <MTAThread()>
+    <System.Diagnostics.DebuggerNonUserCode()>
     Shared Sub Main()
         Dim ServicesToRun() As System.ServiceProcess.ServiceBase
 
@@ -28,7 +28,7 @@ Partial Class Service1
         '
         '   ServicesToRun = New System.ServiceProcess.ServiceBase () {New Service1, New MySecondUserService}
         '
-        ServicesToRun = New System.ServiceProcess.ServiceBase() {New Service1}
+        ServicesToRun = New System.ServiceProcess.ServiceBase() {New MainService}
 
         System.ServiceProcess.ServiceBase.Run(ServicesToRun)
     End Sub

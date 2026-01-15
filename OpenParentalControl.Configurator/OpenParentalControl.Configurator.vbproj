@@ -4,13 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BB9EC863-805B-4631-AF02-5AFDEEEFE6C4}</ProjectGuid>
+    <ProjectGuid>{44EB7E29-E0B0-47DA-A9DB-0BC2CBB6527B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>OpenParentalControl.MainService</StartupObject>
-    <RootNamespace>OpenParentalControl</RootNamespace>
-    <AssemblyName>OpenParentalControl</AssemblyName>
+    <StartupObject>OpenParentalControl.Configurator.My.MyApplication</StartupObject>
+    <RootNamespace>OpenParentalControl.Configurator</RootNamespace>
+    <AssemblyName>OpenParentalControl.Configurator</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>Console</MyType>
+    <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -22,7 +22,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>OpenParentalControl.xml</DocumentationFile>
+    <DocumentationFile>OpenParentalControl.Configurator.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -32,7 +32,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>OpenParentalControl.xml</DocumentationFile>
+    <DocumentationFile>OpenParentalControl.Configurator.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -51,7 +51,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
-    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -64,23 +65,25 @@
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
     <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
     <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
     <Import Include="System.Linq" />
     <Import Include="System.Xml.Linq" />
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigForm.Designer.vb">
+      <DependentUpon>ConfigForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
-    <Compile Include="MainService.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MainService.Designer.vb">
-      <DependentUpon>MainService.vb</DependentUpon>
-    </Compile>
-    <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -91,8 +94,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Program.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ConfigForm.resx">
+      <DependentUpon>ConfigForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -111,8 +118,6 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
-    <None Include="OpenParentalControl.Installer\Install.ps1" />
-    <None Include="OpenParentalControl.Installer\Uninstall.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
